@@ -10,11 +10,15 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-from django.conf.urls import url
+from django.urls import re_path
 
 from openstack_dashboard.dashboards.mydashboard.mypanel import views
 
 
 urlpatterns = [
-    url(r'^$', views.IndexView.as_view(), name='index'),
+    re_path(r'^$', views.IndexView.as_view(), name='index'),
+    re_path(r'^(?P<instance_id>[^/]+)/create_snapshot/$',
+        views.CreateSnapshotView.as_view(),
+        name='create_snapshot'),
 ]
+
