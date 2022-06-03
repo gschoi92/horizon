@@ -10,22 +10,16 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-from django.utils.translation import ugettext_lazy as _
+from horizon import views
+from horizon import tables
+from .tables import InstanceTable 
 
-import horizon
 
-class Mygroup(horizon.PanelGroup):
-    slug = "mygroup"
-    name = _("My Group")
-    panels = ('mypanel', 'testpanel')
+class TableView(tables.DataTableView):
+    # A very simple class-based view...
+    table_class = InstanceTable
+    template_name = 'mydashboard/testpanel/index.html'
     
-class Mydashboard(horizon.Dashboard):
-    name = _("My_dashboard")
-    slug = "mydashboard"
-    panels = (Mygroup,)  # Add your panels here.
-    default_panel = 'mypanel'  # Specify the slug of the dashboard's default panel.
-
-
-horizon.register(Mydashboard)
-
-
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(**kwargs)
+    

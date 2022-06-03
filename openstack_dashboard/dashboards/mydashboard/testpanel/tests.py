@@ -10,22 +10,10 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-from django.utils.translation import ugettext_lazy as _
-
-import horizon
-
-class Mygroup(horizon.PanelGroup):
-    slug = "mygroup"
-    name = _("My Group")
-    panels = ('mypanel', 'testpanel')
-    
-class Mydashboard(horizon.Dashboard):
-    name = _("My_dashboard")
-    slug = "mydashboard"
-    panels = (Mygroup,)  # Add your panels here.
-    default_panel = 'mypanel'  # Specify the slug of the dashboard's default panel.
+from horizon.test import helpers as test
 
 
-horizon.register(Mydashboard)
-
-
+class TestpanelTests(test.TestCase):
+    # Unit tests for mypanel.
+    def test_me(self):
+        self.assertTrue(1 + 1 == 2)

@@ -10,22 +10,11 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-from django.utils.translation import ugettext_lazy as _
+from django.conf.urls import url
 
-import horizon
-
-class Mygroup(horizon.PanelGroup):
-    slug = "mygroup"
-    name = _("My Group")
-    panels = ('mypanel', 'testpanel')
-    
-class Mydashboard(horizon.Dashboard):
-    name = _("My_dashboard")
-    slug = "mydashboard"
-    panels = (Mygroup,)  # Add your panels here.
-    default_panel = 'mypanel'  # Specify the slug of the dashboard's default panel.
+from openstack_dashboard.dashboards.mydashboard.testpanel import views
 
 
-horizon.register(Mydashboard)
-
-
+urlpatterns = [
+    url(r'^$', views.TableView.as_view(), name='index'),
+]
